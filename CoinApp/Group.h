@@ -18,7 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 @property(nonatomic) float  marketCap;
 @property(nonatomic) float  totalVolume;
 @property(nonatomic) float  circulationSupply;
+@property(nonatomic) float  high;
+@property(nonatomic) float  low;
 @property(nonatomic) int  rank;
+
 @end
 
 NS_ASSUME_NONNULL_END

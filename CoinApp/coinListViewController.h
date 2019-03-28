@@ -11,10 +11,11 @@
 #
 NS_ASSUME_NONNULL_BEGIN
 
-@interface coinListViewController : UIViewController{
-
+@interface coinListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
+    bool flag ;
+    UIActivityIndicatorView *activityIndicator ;
 }
-
+@property (nonatomic, strong) NSOperationQueue *queue;
 @end
 
 NS_ASSUME_NONNULL_END

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E0041BE224CD72E00755806 /* deatailData.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4E0041BD224CD72E00755806 /* deatailData.xib */; };
+		4EFEA60B224BA88A000ED8A8 /* deatailData.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFEA609224BA88A000ED8A8 /* deatailData.m */; };
 		4EFFC30C224B49E8008C3F13 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC30B224B49E8008C3F13 /* AppDelegate.m */; };
 		4EFFC30F224B49E8008C3F13 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EFFC30E224B49E8008C3F13 /* ViewController.m */; };
 		4EFFC312224B49E8008C3F13 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4EFFC310224B49E8008C3F13 /* Main.storyboard */; };
@@ -41,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E0041BD224CD72E00755806 /* deatailData.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = deatailData.xib; sourceTree = "<group>"; };
+		4EFEA608224BA88A000ED8A8 /* deatailData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = deatailData.h; sourceTree = "<group>"; };
+		4EFEA609224BA88A000ED8A8 /* deatailData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = deatailData.m; sourceTree = "<group>"; };
 		4EFFC307224B49E8008C3F13 /* CoinApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4EFFC30A224B49E8008C3F13 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4EFFC30B224B49E8008C3F13 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -134,6 +139,9 @@
 				4EFFC349224B5C5F008C3F13 /* Group.m */,
 				4EFFC340224B57E3008C3F13 /* coinListViewController.h */,
 				4EFFC341224B57E3008C3F13 /* coinListViewController.m */,
+				4EFEA608224BA88A000ED8A8 /* deatailData.h */,
+				4E0041BD224CD72E00755806 /* deatailData.xib */,
+				4EFEA609224BA88A000ED8A8 /* deatailData.m */,
 				4EFFC342224B57E3008C3F13 /* coinListViewController.xib */,
 				4EFFC30D224B49E8008C3F13 /* ViewController.h */,
 				4EFFC30E224B49E8008C3F13 /* ViewController.m */,
@@ -268,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4EFFC317224B49EA008C3F13 /* LaunchScreen.storyboard in Resources */,
+				4E0041BE224CD72E00755806 /* deatailData.xib in Resources */,
 				4EFFC314224B49EA008C3F13 /* Assets.xcassets in Resources */,
 				4EFFC312224B49E8008C3F13 /* Main.storyboard in Resources */,
 				4EFFC344224B57E3008C3F13 /* coinListViewController.xib in Resources */,
@@ -297,6 +306,7 @@
 			files = (
 				4EFFC30F224B49E8008C3F13 /* ViewController.m in Sources */,
 				4EFFC31A224B49EA008C3F13 /* main.m in Sources */,
+				4EFEA60B224BA88A000ED8A8 /* deatailData.m in Sources */,
 				4EFFC34A224B5C5F008C3F13 /* Group.m in Sources */,
 				4EFFC343224B57E3008C3F13 /* coinListViewController.m in Sources */,
 				4EFFC33F224B5565008C3F13 /* Communicator.m in Sources */,
@@ -476,6 +486,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QA5HCG2XW6;
 				INFOPLIST_FILE = CoinApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -493,6 +504,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QA5HCG2XW6;
 				INFOPLIST_FILE = CoinApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -31,6 +31,8 @@
         [group setValue:[dict valueForKey:@"total_volume"] forKey:@"totalVolume"];
         [group setValue:[dict valueForKey:@"circulating_supply"] forKey:@"circulationSupply"];
         [group setValue:[dict valueForKey:@"market_cap_rank"] forKey:@"rank"];
+        [group setValue:[dict valueForKey:@"high_24h"] forKey:@"high"];
+        [group setValue:[dict valueForKey:@"low_24h"] forKey:@"low"];
         [groups addObject:group];
         //NSLog(@"ok");
          //NSLog(@"%@\n",group.name);
