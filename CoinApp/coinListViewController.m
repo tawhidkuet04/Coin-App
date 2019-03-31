@@ -12,8 +12,9 @@
 #import "Communicator.h"
 #import "MeetupManager.h"
 #import "AppDelegate.h"
-
-
+#import <PINRemoteImage/PINRemoteImage.h>
+#import <PINRemoteImage/PINImageView+PINRemoteImage.h>
+#import <PINCache/PINCache.h>
 @interface coinListViewController ()<UISplitViewControllerDelegate,UINavigationBarDelegate,UINavigationControllerDelegate>{
     NSArray *group;
     MeetupManager *manager;
@@ -28,6 +29,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    [[PINRemoteImageManager sharedImageManager] setAuthenticationChallenge:^(NSURLSessionTask *task, NSURLAuthenticationChallenge *challenge, PINRemoteImageManagerAuthenticationChallengeCompletionHandler aCompletion)
+//        [aCompletion(NSURLSessionAuthChallengePerformDefaultHandling, nil)];
+//
+//        [[PINRemoteImageManager sharedImageManager]setAuthenticationChallenge:^(NSURLSessionTask *task, NSURLAuthenticationChallenge *challenge, PINRemoteImageManagerAuthenticationChallengeCompletionHandler aCompletion) {
+//            [aCompletion(NSURLSessionAuthChallengePerformDefaultHandling, nil)
+//             }];
 //    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 //    int SCREEN_HEIGHT = [UIScreen mainScreen].bounds.size.height;
 //    int SCREEN_WIDTH = [UIScreen mainScreen].bounds.size.width;
@@ -97,8 +104,8 @@
     flag = true ;
     dispatch_async(dispatch_get_main_queue(), ^{
         
-        [activityIndicator stopAnimating];
-        activityIndicator.hidden = YES;
+        [self->activityIndicator stopAnimating];
+        self->activityIndicator.hidden = YES;
         [self->table reloadData];
     });
 //    dispatch_async(dispatch_get_main_queue(), ^{
@@ -126,31 +133,79 @@
 }
 */
 
-- (UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UITableViewCell *cell = [ tableView dequeueReusableCellWithIdentifier:@"Cell"];
-    if(!cell){
-        cell = [ [UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" ];
-    }
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:( NSIndexPath *)indexPath {
+    static NSString *MyIdentifier = @"MyIdentifier";
     
-    cc = group [indexPath.row]; ;
-    NSURL *url = [[NSURL alloc] initWithString:cc.image];
-    if(cell.imageView.image == nil ){
-        
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+    if (cell == nil) {
+        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:MyIdentifier] autorelease];
     }
-    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error == nil && data != nil)  {
-            
-            //            dispatch_async(dispatch_get_main_queue(), ^{
-            //                self.imageView.image = [UIImage imageWithData:data];
-            //            });
-            
-            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-
-               cell.imageView.image = [UIImage imageWithData:data];
-            }];
-            
-        };
-    }] resume];
+    cc = group [indexPath.row];
+  NSURL *url = [[NSURL alloc] initWithString:cc.image];
+//    UIImageView *imageView = [[UIImageView alloc] init];
+    //[cell.imageView.image pin_setImageFromURL:url];
+//    [imageView pin_setImageFromURL:[NSURL URLWithString:@"http://pinterest.com/kitten.jpg"]];
+    
+    
+  //  cell.imageView.alpha = 0.0f;
+   // __weak PINImageCell *weakCell = cell;
+    
+    [cell.imageView pin_setImageFromURL:url placeholderImage:[UIImage imageNamed:@"Default_Image_Thumbnail.png"]];
+//    cell.
+  // [cell.imageView.image pin_setImageFromURL:[NSURL URLWithString:cc.image]];
+//    SDWebImageManager *manager = [SDWebImageManager sharedManager];
+//    [manager loadImageWithURL:url
+//                      options:0
+//                     progress:^(NSInteger receivedSize, NSInteger expectedSize) {
+//                         // progression tracking code
+//                     }
+//                    completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, BOOL finished, NSURL *imageURL) {
+//                        if (image) {
+//                            // do something with image
+//                        }
+//                    }];
+    
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cc.image]
+//                      placeholderImage:[UIImage imageNamed:@"Default_Image_Thumbnail.png"]];
+    
+//    [SDWebImageDownloader.sharedDownloader downloadImageWithURL:url
+//                                                        options:0
+//                                                       progress:nil
+//                                                      completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished)
+//     {
+//         if (cell.tag == indexPath.row && image && finished)
+//         {
+//             dispatch_async(dispatch_get_main_queue(), ^(){
+//                 cell.imageView.image = image;
+//             });
+//
+//         }
+//     }];
+    
+//     [cell.imageView setImageWithURL:[NSURL URLWithString:cc.image] andResize:CGSizeMake(30, 30) withContentMode:UIViewContentModeScaleAspectFit];
+    
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:cc.image]
+//                      placeholderImage:[UIImage imageNamed:@"fa-image.png"]];
+//    [cell.imageView sd_setImageWithURL:[NSURL URLWithString:@"https://www.google.com/url?sa=i&rct=j&q=&esrc=s&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwiSqYCr8KThAhVCo48KHaPJDAgQjRx6BAgBEAU&url=http%3A%2F%2Ffdiv.net%2F2013%2F05%2F17%2Fgetting-html5-video-work-ios-mobile-safari&psig=AOvVaw1bLl_KsIkgqBfS5wKMi8sa&ust=1553863456202007"]];
+ //   NSURL *url = [[NSURL alloc] initWithString:cc.image];
+//    if(cell.imageView.image == nil ){
+//
+//    }
+//    [[[NSURLSession sharedSession] dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+//        if (error == nil && data != nil)  {
+//
+//                        dispatch_async(dispatch_get_main_queue(), ^{
+//                            cell.imageView.image = [UIImage imageWithData:data];
+//                        });
+//
+////            [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+////
+////              cell.imageView.image = [UIImage imageWithData:data];
+////            }];
+//
+//        };
+//    }] resume];
 
 //    NSData * imageData = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: cc.image]];
 //    cell.imageView.image = [UIImage imageWithData: imageData];
@@ -168,6 +223,5 @@
     [self.navigationController pushViewController:con animated:YES ];
     
 }
-
 
 @end

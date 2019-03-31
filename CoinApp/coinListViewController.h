@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
-#
+
 NS_ASSUME_NONNULL_BEGIN
 
 @interface coinListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
@@ -16,6 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
     UIActivityIndicatorView *activityIndicator ;
 }
 @property (nonatomic, strong) NSOperationQueue *queue;
+- (void)prepareForReuse;
 @end
 
 NS_ASSUME_NONNULL_END
