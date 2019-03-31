@@ -90,7 +90,7 @@
                     tradingVolume.text= [NSString stringWithFormat:@"%@",[[json valueForKey:@"market_data"]valueForKey:@"circulating_supply"]];
                     high.text = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"high_24h"]valueForKey:@"usd"]];
                     low.text = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"low_24h"]valueForKey:@"usd"]];
-                    totalSupply.text =[NSString stringWithFormat:@"%d",[[json valueForKey:@"market_data"]valueForKey:@"total_supply"]];
+                    totalSupply.text =[NSString stringWithFormat:@"%@",[[json valueForKey:@"market_data"]valueForKey:@"total_supply"]];
                     rank.text=[NSString stringWithFormat:@"%@",[[json valueForKey:@"market_data"]valueForKey:@"market_cap_rank"]];
                     //            self->description.text =[NSString stringWithFormat:@"%@",[ok valueForKey:@"en"] ];
                     

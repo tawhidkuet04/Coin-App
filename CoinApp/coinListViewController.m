@@ -29,6 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //group = [[NSArray alloc] initWithArray:groups ];
 //    [[PINRemoteImageManager sharedImageManager] setAuthenticationChallenge:^(NSURLSessionTask *task, NSURLAuthenticationChallenge *challenge, PINRemoteImageManagerAuthenticationChallengeCompletionHandler aCompletion)
 //        [aCompletion(NSURLSessionAuthChallengePerformDefaultHandling, nil)];
 //
@@ -63,8 +64,9 @@
         self->manager.communicator.delegate = self->manager;
         self->manager.delegate = self;
         NSLog(@"asdasd");
+         [manager fetchGroupsAtCoordinate];
         //[manager fetchGroupsAtCoordinate];
-       [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startFetchingGroups:) name:NULL object:nil];
+       //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startFetchingGroups:) name:NULL object:nil];
         
         // Interaction with User Interface - Main thread
         
@@ -99,8 +101,10 @@
 
 - (void)didReceiveGroups:(NSArray *)groups
 {
+  
+      group = [[NSArray alloc] initWithArray:groups ];
 
-    group = [[NSArray alloc] initWithArray:groups ];
+
     
     dispatch_async(dispatch_get_main_queue(), ^{
         NSLog(@"reloading");
@@ -108,6 +112,7 @@
         self->activityIndicator.hidden = YES;
         [self->table reloadData];
     });
+    }
     
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //
@@ -116,7 +121,7 @@
 //        NSLog(@"%f\n",cc.marketCap);
 //    }
    
-}
+
 - (void)fetchingGroupsFailedWithError:(NSError *)error
 {
     NSLog(@"Error %@; %@", error, [error localizedDescription]);
