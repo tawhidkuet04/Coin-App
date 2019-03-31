@@ -40,7 +40,7 @@
     self->activityIndicator= [[UIActivityIndicatorView alloc]
                               initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
 
-    activityIndicator.center = CGPointMake( self.view.frame.size.width/2,self.view.frame.size.height/1.2);
+    activityIndicator.center = CGPointMake( self.view.frame.size.width/2,self.view.frame.size.height/2);
     [self->activityIndicator startAnimating];
     [self.view addSubview:self->activityIndicator];
     
@@ -61,14 +61,7 @@
         };
     }] resume];
     
-    name.text = _coin.name;
-    currentPrice.text = [NSString stringWithFormat:@"%f",_coin.currentPrice];
-    marketCap.text= [NSString stringWithFormat:@"%f",_coin.marketCap];
-    tradingVolume.text= [NSString stringWithFormat:@"%f",_coin.circulationSupply];
-    high.text = [NSString stringWithFormat:@"%f",_coin.high];
-    low.text = [NSString stringWithFormat:@"%f",_coin.low];
-    totalSupply.text = [NSString stringWithFormat:@"%f",_coin.totalVolume];
-    rank.text=[NSString stringWithFormat:@"%d",_coin.rank];
+   
     
     
     // Do any additional setup after loading the view from its nib.
@@ -77,27 +70,44 @@
     dispatch_queue_t queue = dispatch_queue_create("data_process", 0);
     dispatch_async(queue, ^{
         // data processing
-        NSError *error;
+        [[[NSURLSession sharedSession] dataTaskWithURL:[NSURL URLWithString:url_string] completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            if (error == nil && data != nil)  {
+                
+                NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
+                Group *group = [[Group alloc] init];
+                
+                // [group setValue:[json valueForKey:@"id"] forKey:@"idName"];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSDictionary *ok =[json valueForKey:@"description"];
+                    
+//                    NSLog(@"json: %@", [[[json valueForKey:@"market_data"]valueForKey:@"current_price"]valueForKey:@"usd"]);
+             
+                    [self->activityIndicator stopAnimating];
+                    self->activityIndicator.hidden = YES;
+                    name.text = _coin.name;
+                    currentPrice.text = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"current_price"]valueForKey:@"usd"]];
+                    marketCap.text= [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"market_cap"]valueForKey:@"usd"]];
+                    tradingVolume.text= [NSString stringWithFormat:@"%@",[[json valueForKey:@"market_data"]valueForKey:@"circulating_supply"]];
+                    high.text = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"high_24h"]valueForKey:@"usd"]];
+                    low.text = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"low_24h"]valueForKey:@"usd"]];
+                    totalSupply.text =[NSString stringWithFormat:@"%d",[[json valueForKey:@"market_data"]valueForKey:@"total_supply"]];
+                    rank.text=[NSString stringWithFormat:@"%@",[[json valueForKey:@"market_data"]valueForKey:@"market_cap_rank"]];
+                    //            self->description.text =[NSString stringWithFormat:@"%@",[ok valueForKey:@"en"] ];
+                    
+                    [self->web setBackgroundColor:[UIColor clearColor]];
+                    [self->web loadHTMLString:[ok valueForKey:@"en"] baseURL:nil];
+                    //  [self.view addSubview:web];
+                    //   NSLog(@"%f %f",self.view.frame.size.height,self->web.frame.size.width);
+                    
+                });
+                
+            }else {
+                
+            };
+        }] resume];
         
-        NSData *data = [NSData dataWithContentsOfURL: [NSURL URLWithString:url_string]];
-        NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-        Group *group = [[Group alloc] init];
        
-       // [group setValue:[json valueForKey:@"id"] forKey:@"idName"];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSDictionary *ok =[json valueForKey:@"description"];
-            
-            NSLog(@"json: %@", json );
-//            self->description.text =[NSString stringWithFormat:@"%@",[ok valueForKey:@"en"] ];
-            [self->activityIndicator stopAnimating];
-            self->activityIndicator.hidden = YES;
-            [self->web setBackgroundColor:[UIColor clearColor]];
-            [self->web loadHTMLString:[ok valueForKey:@"en"] baseURL:nil];
-          //  [self.view addSubview:web];
-         //   NSLog(@"%f %f",self.view.frame.size.height,self->web.frame.size.width);
-            
-        });
-        
+       
     });
     
 }

@@ -99,15 +99,16 @@
 
 - (void)didReceiveGroups:(NSArray *)groups
 {
-    
+
     group = [[NSArray alloc] initWithArray:groups ];
-    flag = true ;
+    
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+        NSLog(@"reloading");
         [self->activityIndicator stopAnimating];
         self->activityIndicator.hidden = YES;
         [self->table reloadData];
     });
+    
 //    dispatch_async(dispatch_get_main_queue(), ^{
 //
 //    });
