@@ -104,8 +104,9 @@
 
 - (void)startFetchingGroups:(NSNotification *)notification
 {
-    // NSLog(@"reloadingaa");
+     NSLog(@"reloadingaa");
     [manager fetchGroupsAtCoordinate];
+    [refreshControl endRefreshing];
     
 }
 
