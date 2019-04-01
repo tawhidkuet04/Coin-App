@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface coinListViewController : UIViewController<UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate>{
     int x ;
     UIActivityIndicatorView *activityIndicator ;
+    UIRefreshControl *refreshControl;
 }
 @property (nonatomic, strong) NSOperationQueue *queue;
 - (void)prepareForReuse;

@@ -52,6 +52,14 @@
     // create a queue
     dispatch_queue_t queue = dispatch_queue_create("data_process", 0);
     cc = [[Group alloc] init];
+    refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(startFetchingGroups:) forControlEvents:UIControlEventValueChanged];
+    if (@available(iOS 10.0, *)) {
+         table.refreshControl =refreshControl;
+        //self.mytableView.refreshControl = refreshControl;
+    } else {
+        //[self.mytableView addSubview:refreshControl];
+    }
     // send a block to the queue - Not in Main thread
     dispatch_async(queue, ^{
         // data processing
@@ -64,6 +72,7 @@
         self->manager.communicator.delegate = self->manager;
         self->manager.delegate = self;
         NSLog(@"asdasd");
+
          [manager fetchGroupsAtCoordinate];
         //[manager fetchGroupsAtCoordinate];
        //[[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(startFetchingGroups:) name:NULL object:nil];
@@ -95,6 +104,7 @@
 
 - (void)startFetchingGroups:(NSNotification *)notification
 {
+    // NSLog(@"reloadingaa");
     [manager fetchGroupsAtCoordinate];
     
 }

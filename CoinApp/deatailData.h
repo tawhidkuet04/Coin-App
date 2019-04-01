@@ -14,6 +14,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface deatailData : UIViewController{    
     UIActivityIndicatorView *activityIndicator;
 }
+@property (retain, nonatomic) IBOutlet UIScrollView *scroll;
+@property (retain, nonatomic) IBOutlet NSLayoutConstraint *scrollHeightCons;
 
 @property(nonatomic) Group *coin;
 -(void)downloadData:(NSString *)url_string;
