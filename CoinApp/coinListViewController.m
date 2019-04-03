@@ -29,19 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //group = [[NSArray alloc] initWithArray:groups ];
-//    [[PINRemoteImageManager sharedImageManager] setAuthenticationChallenge:^(NSURLSessionTask *task, NSURLAuthenticationChallenge *challenge, PINRemoteImageManagerAuthenticationChallengeCompletionHandler aCompletion)
-//        [aCompletion(NSURLSessionAuthChallengePerformDefaultHandling, nil)];
-//
-//        [[PINRemoteImageManager sharedImageManager]setAuthenticationChallenge:^(NSURLSessionTask *task, NSURLAuthenticationChallenge *challenge, PINRemoteImageManagerAuthenticationChallengeCompletionHandler aCompletion) {
-//            [aCompletion(NSURLSessionAuthChallengePerformDefaultHandling, nil)
-//             }];
-//    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-//    int SCREEN_HEIGHT = [UIScreen mainScreen].bounds.size.height;
-//    int SCREEN_WIDTH = [UIScreen mainScreen].bounds.size.width;
-//    [activityIndicator setCenter:CGPointMake(SCREEN_WIDTH/4, SCREEN_HEIGHT/4)];
-//    [self.view addSubview:activityIndicator];
-//    [activityIndicator startAnimating];
+    self.title = @"Coin App";
 //
     activityIndicator= [[UIActivityIndicatorView alloc]
                                              initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];

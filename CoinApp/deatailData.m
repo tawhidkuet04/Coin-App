@@ -34,63 +34,23 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSLog(@"%@",_coin.image);
-        scroll.delegate = self;
-     //   [self.view addSubview:scroll];
-        [scroll setScrollEnabled:YES];
-   
-    //[scroll setContentSize:CGSizeMake(700,2000)];
+    scroll.delegate = self;
+
+    [scroll setScrollEnabled:YES];
+
     web.delegate = self;
-   
+    //height = web.scrollView.contentSize.height;
     web.scrollView.scrollEnabled = NO;
-   // web.scrollView.bounces = NO;
-//
-//    
-//    
-//    scroll = [[UIScrollView alloc]initWithFrame:CGRectMake(8, 79, CGRectGetWidth(self.view.frame)-16, CGRectGetHeight(self.view.frame))];
-//    scroll.backgroundColor = [UIColor redColor];
-//    scroll.delegate = self;
-//    [self.view addSubview:scroll];
-//    [scroll setScrollEnabled:YES];
-//    
-//   
-////    self->scroll.contentSize = contentRect.size;
-////    [scroll setContentSize:CGSizeMake(scroll.bounds.size.width
-////                                      , scroll.bounds.size
-////                                      .height*5)];
-//    
-//    ok = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(scroll.frame),CGRectGetHeight(scroll.frame) )];
-//    ok.font = [UIFont systemFontOfSize:12.0];
-//    ok.numberOfLines = 0;
-//    ok.minimumFontSize = 8.0f;
-//    ok.adjustsFontSizeToFitWidth = YES;
-//    ok.lineBreakMode = UILineBreakModeWordWrap;
-//    ok.text = @"The CarPlay framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.The CarPlay framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.The CarPlay framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.The CarPlay framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.y framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.The CarPlay framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.The CarPlay framework provides a system-generated and -hosted user interface that you customize to display your navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.navigation app. The framework maintains control over UI elements—such as touch target size, font size and color, highlights, and so on—while also enabling your app to display custom map tiles, trip and routing information, and more. This flexibility lets you focus on delivering a great CarPlay experience without the burden of creating an app that works on all supported CarPlay systems.The CarPlay framewor";
-//    [scroll addSubview:ok];
-//    CGFloat scrollViewHeight = 0.0f;
-//    for (UIView* view in scroll.subviews)
-//    {
-//        scrollViewHeight += view.frame.size.height;
-//    }
-//    NSLog(@"sdasd %f",scrollViewHeight);
-//   // [scroll setContentSize:CGSizeMake(scroll.bounds.size.width, scroll.bounds.size
-//                                                               //            .heigh//t*5)];
-//    [scroll setContentSize:CGSizeMake(self.view.frame.size.width, scrollViewHeight*2)];
-//   
-//    scroll.maximumZoomScale = 1.0f;
-//    scroll.minimumZoomScale = 1.0f;
-//    [scroll setAlwaysBounceHorizontal:false];
-//    scroll.contentInset = UIEdgeInsetsZero;
-//    scroll.contentOffset = CGPointZero;
-//    scroll.contentSize = CGSizeMake(CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+ 
     self.title = _coin.name;
     NSString *url_string = [NSString stringWithFormat: @"https://api.coingecko.com/api/v3/coins/%@?localization=false",_coin.idName];
-    [self downloadData:url_string];
+   
     NSLog(@"%@",url_string);
     self->activityIndicator= [[UIActivityIndicatorView alloc]
                               initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-
-    activityIndicator.center = CGPointMake( self.view.frame.size.width/2,self.view.frame.size.height/2);
+    activityIndicator.center = self.view.center;
     [self->activityIndicator startAnimating];
+    [self downloadData:url_string];
     //[self.scroll addSubview:self->activityIndicator];
   //  [self.scroll addSubview:web];
     
@@ -123,7 +83,7 @@
             if (error == nil && data != nil)  {
                 
                 NSMutableArray *json = [NSJSONSerialization JSONObjectWithData:data options:kNilOptions error:&error];
-                Group *group = [[Group alloc] init];
+              //  Group *group = [[Group alloc] init];
                 
                 // [group setValue:[json valueForKey:@"id"] forKey:@"idName"];
                 dispatch_async(dispatch_get_main_queue(), ^{
@@ -131,8 +91,8 @@
                     
 //                    NSLog(@"json: %@", [[[json valueForKey:@"market_data"]valueForKey:@"current_price"]valueForKey:@"usd"]);
              
-                    [self->activityIndicator stopAnimating];
-                    self->activityIndicator.hidden = YES;
+//                    [self->activityIndicator stopAnimating];
+//                    self->activityIndicator.hidden = YES;
                     name.text = _coin.name;
                     currentPrice.text = [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"current_price"]valueForKey:@"usd"]];
                     marketCap.text= [NSString stringWithFormat:@"%@",[[[json valueForKey:@"market_data"]valueForKey:@"market_cap"]valueForKey:@"usd"]];
@@ -145,6 +105,8 @@
                     
                     [self->web setBackgroundColor:[UIColor clearColor]];
                     [self->web loadHTMLString:[ok valueForKey:@"en"] baseURL:nil];
+                   // web.scalesPageToFit = true
+                   // web.contentMode = .scaleAspectFit;
 //                    CGFloat scrollViewHeight = 0.0f;
 //                    for (UIView* view in web)
 //                    {
@@ -153,7 +115,8 @@
 //                    NSString *result = [self->web stringByEvaluatingJavaScriptFromString:@"document.body.offsetHeight;"];
 //
 //                    float height = [result integerValue];
-                    self.scrollHeightCons.constant = web.scrollView.contentSize.height;
+                   // NSLog(@"%f\n",height);
+                   
                    // self.scrollHeightCons.constant = web.frame.size.height+200;
                     
                     
@@ -174,12 +137,12 @@
 #pragma mark - ScrollviewDelegate
 
 -(void)scrollViewDidZoom:(UIScrollView *)scrollView{
-    NSLog(@"scrollViewDidZoom");
+    //NSLog(@"scrollViewDidZoom");
 }
 
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView{
    // scrollView.contentOffset = CGPointMake(0, scrollView.contentOffset.y);
-    NSLog(@"scrollViewDidScroll %@",NSStringFromCGPoint(scrollView.contentOffset));
+    //NSLog(@"scrollViewDidScroll %@",NSStringFromCGPoint(scrollView.contentOffset));
 }
 /*
 #pragma mark - Navigation
@@ -190,10 +153,23 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+- (void)webViewDidFinishLoad:(UIWebView *)aWebView {
+    CGRect frame = aWebView.frame;
+    frame.size.height = 1;
+    aWebView.frame = frame;
+    CGSize fittingSize = [aWebView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    aWebView.frame = frame;
+    height =fittingSize.height - 400;
+    NSLog(@"%f\n",height);
+    self.scrollHeightCons.constant = height;
+    NSLog(@"size: %f, %f", fittingSize.width, fittingSize.height);
+}
 - (void)dealloc {
     [scroll release];
     [_scrollHeightCons release];
     [super dealloc];
 }
 @end
+
+

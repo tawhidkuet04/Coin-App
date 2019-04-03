@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface deatailData : UIViewController{    
     UIActivityIndicatorView *activityIndicator;
+    float height ;
 }
 @property (retain, nonatomic) IBOutlet UIScrollView *scroll;
 @property (retain, nonatomic) IBOutlet NSLayoutConstraint *scrollHeightCons;
